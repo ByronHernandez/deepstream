@@ -1,0 +1,25 @@
+root_path: "/home/bhernandez/Documents/deepstream/workspace"
+
+video:
+  path: "experiments/filtered40v1_first_run/videos/Warehouse_Synthetic_Cam008.mp4"
+  bound_to_tracking_id: false
+
+config_path:
+  tracker_output: "experiments/filtered40v1_first_run/trajDumps/trajDump_Stream_8.txt"
+
+overlay:
+  display: false
+  show:
+    tracker_output_bbox: false
+    tracker_output_bbox_center: true
+    tracker_output_trajectory: true
+    tracker_output_convex_hull: true
+    use_foot_location: true
+    mdat_output: false
+    frame_nb: true
+  tracking:
+    type: "all"
+    id: 0
+  bbox_frame:
+    width: 1920
+    height: 1080

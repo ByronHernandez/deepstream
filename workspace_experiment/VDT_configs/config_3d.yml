@@ -1,0 +1,24 @@
+root_path: "/home/bhernandez/Documents/deepstream/DS_Perf/workspace_experiment"
+
+video:
+  path: "py-motmetrics/experiment/dataset/videos/Warehouse_Synthetic_Cam048-occ.mp4"
+  bound_to_tracking_id: false
+
+config_path:
+  tracker_output: "py-motmetrics/experiment/dataset/trajDumps/trajDump_Stream_48_occ.txt"
+
+overlay:
+  show:
+    tracker_output_bbox: false
+    tracker_output_bbox_center: true
+    tracker_output_trajectory: true
+    tracker_output_convex_hull: true
+    use_foot_location: true
+    mdat_output: false
+    frame_nb: true
+  tracking:
+    type: "all"
+    id: 0
+  bbox_frame:
+    width: 1920
+    height: 1080

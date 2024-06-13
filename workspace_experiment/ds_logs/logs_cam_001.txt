@@ -1,0 +1,252 @@
+
+===============================
+   DeepStreamSDK 7.0.0
+===============================
+
+*** LICENSE AGREEMENT ***
+By using this software you agree to fully comply with the terms and conditions
+of the License Agreement. The License Agreement is located at
+/opt/nvidia/deepstream/deepstream/LicenseAgreement.pdf. If you do not agree
+to the terms and conditions of the License Agreement do not use the software.
+
+
+=============================
+== Triton Inference Server ==
+=============================
+
+NVIDIA Release 23.10 (build 72127154)
+Triton Server Version 2.39.0
+
+Copyright (c) 2018-2023, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+Warning: 'input-dims' parameter has been deprecated. Use 'infer-dims' instead.
+gstnvtracker: Loading low-level lib at /opt/nvidia/deepstream/deepstream/lib/libnvds_nvmultiobjecttracker.so
+[NvMultiObjectTracker] Loading TRT Engine for tracker ReID...
+WARNING: [TRT]: Using an engine plan file across different models of devices is not recommended and is likely to affect performance or even cause errors.
+[NvMultiObjectTracker] Loading Complete!
+ERROR: [TRT]: 3: [runtime.cpp::~Runtime::346] Error Code 3: API Usage Error (Parameter check failed at: runtime/rt/runtime.cpp::~Runtime::346, condition: mEngineCounter.use_count() == 1. Destroying a runtime before destroying deserialized engines created by the runtime leads to undefined behavior.
+)
+[NvMultiObjectTracker] MaxStreams = 1
+[NvMultiObjectTracker] MaxTargetsToTrack = 150
+[NvMultiObjectTracker] Initialized BH
+WARNING: [TRT]: Using an engine plan file across different models of devices is not recommended and is likely to affect performance or even cause errors.
+0:00:05.814668342 [33m   14[00m 0x621064b4de40 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:682:gst_nvinfer_logger:<primary_gie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::deserializeEngineAndBackend() <nvdsinfer_context_impl.cpp:2095> [UID = 1]: deserialized trt engine from :/home/bhernandez/Documents/deepstream/workspace_experiment/models/PeopleNet2.6/resnet34_peoplenet_int8.etlt_b1_gpu0_int8.engine
+INFO: ../nvdsinfer/nvdsinfer_model_builder.cpp:612 [Implicit Engine Info]: layers num: 3
+0   INPUT  kFLOAT input_1         3x544x960       
+1   OUTPUT kFLOAT output_bbox/BiasAdd 12x34x60        
+2   OUTPUT kFLOAT output_cov/Sigmoid 3x34x60         
+
+0:00:05.893737114 [33m   14[00m 0x621064b4de40 [36mINFO   [00m [00m             nvinfer gstnvinfer.cpp:682:gst_nvinfer_logger:<primary_gie>[00m NvDsInferContext[UID 1]: Info from NvDsInferContextImpl::generateBackendContext() <nvdsinfer_context_impl.cpp:2198> [UID = 1]: Use deserialized engine model: /home/bhernandez/Documents/deepstream/workspace_experiment/models/PeopleNet2.6/resnet34_peoplenet_int8.etlt_b1_gpu0_int8.engine
+0:00:05.899423637 [33m   14[00m 0x621064b4de40 [36mINFO   [00m [00m             nvinfer gstnvinfer_impl.cpp:343:notifyLoadModelStatus:<primary_gie>[00m [UID 1]: Load new model:/home/bhernandez/Documents/deepstream/workspace_experiment/config_pgie.txt sucessfully
+
+Runtime commands:
+	h: Print this help
+	q: Quit
+
+	p: Pause
+	r: Resume
+
+NOTE: To expand a source in the 2D tiled display and view object details, left-click on the source.
+      To go back to the tiled display, right-click anywhere on the window.
+
+
+**PERF:  FPS 0 (Avg)	
+**PERF:  0.00 (0.00)	
+** INFO: <bus_callback:291>: Pipeline ready
+
+** INFO: <bus_callback:277>: Pipeline running
+
+**PERF:  0.00 (0.00)	
+Stream[0][ObjectModelProjector::importCameraModelInfo] cameraModelYaml.size() = 2
+m_ProjMat_World2Cam = 
+    24.2998     36.0221    -12.1148      2498.5
+    5.14584    -8.90163    -39.7664    -131.821
+-0.00991811    0.017157  -0.0126195           1
+Stream[0] m_HomographyMat_WorldHeadPlane2CamOpticalCenter = 
+    24.2998     36.0221     2479.12
+    5.14584    -8.90163    -195.447
+-0.00991811    0.017157    0.979809
+Stream[0] [projMat_WorldGround2Cam] world origin on ground (0, 0) --> image pt (2498.5, -131.821)
+                          --> world pt on ground (7.10543e-15, 7.10543e-15)
+Stream[0] [projMat_Cam2WorldGround] camera optical center (0, 0) --> world ground pt (-43.5487, -39.9832)
+                      --> camera optical center (-6.09639e-13, -7.62049e-14)
+Stream[0] Stream Ind = 0 importCameraModelInfo() SUCCESS!
+**PERF:  187.32 (185.89)	
+FrameBatch[100] lastTrackerInd = 4, when maxTargetsToTrack = 150 --> (Target capacity utilization = 3.33333 [%])
+FrameBatch[200] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[300] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  325.55 (294.23)	
+FrameBatch[400] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[500] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[600] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[700] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  335.29 (312.34)	
+FrameBatch[800] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[900] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[1000] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+**PERF:  371.98 (330.41)	
+FrameBatch[1100] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[1200] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[1300] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[1400] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[1500] lastTrackerInd = 2, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2 [%])
+**PERF:  431.03 (353.80)	
+FrameBatch[1600] lastTrackerInd = 2, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2 [%])
+FrameBatch[1700] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[1800] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+**PERF:  374.49 (357.74)	
+FrameBatch[1900] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[2000] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[2100] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[2200] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+**PERF:  348.28 (356.30)	
+FrameBatch[2300] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[2400] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[2500] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  326.17 (352.09)	
+FrameBatch[2600] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[2700] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[2800] lastTrackerInd = 7, when maxTargetsToTrack = 150 --> (Target capacity utilization = 5.33333 [%])
+**PERF:  303.14 (346.16)	
+FrameBatch[2900] lastTrackerInd = 7, when maxTargetsToTrack = 150 --> (Target capacity utilization = 5.33333 [%])
+FrameBatch[3000] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[3100] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+**PERF:  287.44 (339.90)	
+FrameBatch[3200] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[3300] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[3400] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+**PERF:  297.68 (335.80)	
+FrameBatch[3500] lastTrackerInd = 7, when maxTargetsToTrack = 150 --> (Target capacity utilization = 5.33333 [%])
+FrameBatch[3600] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[3700] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+**PERF:  294.66 (332.07)	
+FrameBatch[3800] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[3900] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[4000] lastTrackerInd = 9, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6.66667 [%])
+**PERF:  305.87 (330.00)	
+FrameBatch[4100] lastTrackerInd = 9, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6.66667 [%])
+FrameBatch[4200] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[4300] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+**PERF:  296.67 (327.50)	
+FrameBatch[4400] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[4500] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[4600] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+**PERF:  293.17 (325.06)	
+FrameBatch[4700] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[4800] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[4900] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+**PERF:  310.60 (324.12)	
+FrameBatch[5000] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[5100] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[5200] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[5300] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+**PERF:  353.20 (325.94)	
+FrameBatch[5400] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[5500] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+FrameBatch[5600] lastTrackerInd = 10, when maxTargetsToTrack = 150 --> (Target capacity utilization = 7.33333 [%])
+**PERF:  375.86 (328.81)	
+FrameBatch[5700] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[5800] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[5900] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[6000] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+
+**PERF:  FPS 0 (Avg)	
+**PERF:  355.19 (330.23)	
+FrameBatch[6100] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[6200] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[6300] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+**PERF:  335.93 (330.56)	
+FrameBatch[6400] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[6500] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[6600] lastTrackerInd = 8, when maxTargetsToTrack = 150 --> (Target capacity utilization = 6 [%])
+FrameBatch[6700] lastTrackerInd = 4, when maxTargetsToTrack = 150 --> (Target capacity utilization = 3.33333 [%])
+**PERF:  348.52 (331.45)	
+FrameBatch[6800] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[6900] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[7000] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+**PERF:  324.13 (331.09)	
+FrameBatch[7100] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[7200] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[7300] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  334.15 (331.20)	
+FrameBatch[7400] lastTrackerInd = 7, when maxTargetsToTrack = 150 --> (Target capacity utilization = 5.33333 [%])
+FrameBatch[7500] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[7600] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[7700] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  331.74 (331.22)	
+FrameBatch[7800] lastTrackerInd = 7, when maxTargetsToTrack = 150 --> (Target capacity utilization = 5.33333 [%])
+FrameBatch[7900] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[8000] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  335.02 (331.41)	
+FrameBatch[8100] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[8200] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[8300] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+FrameBatch[8400] lastTrackerInd = 6, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4.66667 [%])
+**PERF:  382.50 (333.43)	
+FrameBatch[8500] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[8600] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[8700] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[8800] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+**PERF:  391.95 (335.62)	
+FrameBatch[8900] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[9000] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[9100] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[9200] lastTrackerInd = 0, when maxTargetsToTrack = 150 --> (Target capacity utilization = 0.666667 [%])
+FrameBatch[9300] lastTrackerInd = 1, when maxTargetsToTrack = 150 --> (Target capacity utilization = 1.33333 [%])
+**PERF:  469.77 (340.57)	
+FrameBatch[9400] lastTrackerInd = 1, when maxTargetsToTrack = 150 --> (Target capacity utilization = 1.33333 [%])
+FrameBatch[9500] lastTrackerInd = 0, when maxTargetsToTrack = 150 --> (Target capacity utilization = 0.666667 [%])
+FrameBatch[9600] lastTrackerInd = 0, when maxTargetsToTrack = 150 --> (Target capacity utilization = 0.666667 [%])
+FrameBatch[9700] lastTrackerInd = 0, when maxTargetsToTrack = 150 --> (Target capacity utilization = 0.666667 [%])
+**PERF:  469.47 (345.13)	
+FrameBatch[9800] lastTrackerInd = 1, when maxTargetsToTrack = 150 --> (Target capacity utilization = 1.33333 [%])
+FrameBatch[9900] lastTrackerInd = 2, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2 [%])
+FrameBatch[10000] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[10100] lastTrackerInd = 2, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2 [%])
+**PERF:  417.44 (347.61)	
+FrameBatch[10200] lastTrackerInd = 3, when maxTargetsToTrack = 150 --> (Target capacity utilization = 2.66667 [%])
+FrameBatch[10300] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[10400] lastTrackerInd = 4, when maxTargetsToTrack = 150 --> (Target capacity utilization = 3.33333 [%])
+FrameBatch[10500] lastTrackerInd = 4, when maxTargetsToTrack = 150 --> (Target capacity utilization = 3.33333 [%])
+**PERF:  361.71 (348.07)	
+FrameBatch[10600] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+FrameBatch[10700] lastTrackerInd = 5, when maxTargetsToTrack = 150 --> (Target capacity utilization = 4 [%])
+nvstreammux: Successfully handled EOS for source_id=0
+** INFO: <bus_callback:314>: Received EOS. Exiting ...
+
+Quitting
+[NvMultiObjectTracker] De-initialized
+App run successful
+
+===============================
+   DeepStreamSDK 7.0.0
+===============================
+
+*** LICENSE AGREEMENT ***
+By using this software you agree to fully comply with the terms and conditions
+of the License Agreement. The License Agreement is located at
+/opt/nvidia/deepstream/deepstream/LicenseAgreement.pdf. If you do not agree
+to the terms and conditions of the License Agreement do not use the software.
+
+
+=============================
+== Triton Inference Server ==
+=============================
+
+NVIDIA Release 23.10 (build 72127154)
+Triton Server Version 2.39.0
+
+Copyright (c) 2018-2023, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+

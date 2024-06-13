@@ -1,0 +1,50 @@
+
+
+[osd]
+enable=1
+nvbuf-memory-type=0
+clock-color=1;0;0;0
+clock-text-size=12
+show-clock=0
+font=Serif
+text-size=10
+text-bg-color=0.3;0.3;0.3;1
+text-color=1;1;1;1
+border-width=1
+clock-x-offset=800
+clock-y-offset=820
+gpu-id=0
+display-text=1
+
+[tiled-display]
+enable=1
+gpu-id=0
+width=1920
+height=1080
+nvbuf-memory-type=0
+rows=1
+columns=1
+
+
+
+[sink0]
+enable=1
+type=1 # fakeSink
+qos=0
+gpu-id=0
+nvbuf-memory-type=0
+source-id=0
+sync=0
+
+
+
+[sink0]
+enable=1
+type=3 # file
+container=1 # mp4
+codec=1 #h264
+enc-type=0 # hardware
+sync=0
+bitrate=2000000
+profile=0 # baseline
+output-file=outVideos/out_Warehouse_Synthetic_Cam000.mp4

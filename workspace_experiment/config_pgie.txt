@@ -1,0 +1,52 @@
+# Copyright (c) 2019 NVIDIA Corporation.  All rights reserved.
+#
+# NVIDIA Corporation and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto.  Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA Corporation is strictly prohibited.
+
+# The values in the config file are overridden by values set through GObject
+# properties/application config file.
+
+# config_infer_primary_PeopleNet_V2.6_NvDCF.txt
+
+[property]
+## model-specific params. The paths will be different if the user sets up in different directory.
+int8-calib-file=models/PeopleNet2.6/resnet34_peoplenet_int8.txt
+labelfile-path=models/PeopleNet2.6/labels.txt
+tlt-encoded-model=models/PeopleNet2.6/resnet34_peoplenet_int8.etlt
+tlt-model-key=tlt_encode
+
+gpu-id=0
+net-scale-factor=0.0039215697906911373
+input-dims=3;544;960;0
+uff-input-blob-name=input_1
+process-mode=1
+model-color-format=0
+## 0=FP32, 1=INT8, 2=FP16 mode
+network-mode=1
+num-detected-classes=3
+interval=0
+gie-unique-id=1
+output-blob-names=output_cov/Sigmoid;output_bbox/BiasAdd
+## 1=DBSCAN, 2=NMS, 3= DBSCAN+NMS Hybrid, 4 = None(No clustering)
+cluster-mode=3
+maintain-aspect-ratio=1
+
+[class-attrs-all]
+pre-cluster-threshold=0.1037
+nms-iou-threshold=0.4842
+minBoxes=4
+dbscan-min-score=1.1845
+eps=0.3207
+detected-min-w=20
+detected-min-h=20
+
+## Per class configuration
+[class-attrs-1]
+pre-cluster-threshold=999
+
+## Per class configuration
+[class-attrs-2]
+pre-cluster-threshold=999

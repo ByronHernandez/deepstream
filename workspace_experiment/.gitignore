@@ -1,0 +1,8 @@
+dataset/
+datasets/
+experiments/
+models/
+venv/
+*.mp4
+*.avi
+*.png

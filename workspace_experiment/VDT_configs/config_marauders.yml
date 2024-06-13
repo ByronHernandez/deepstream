@@ -1,0 +1,57 @@
+root_path: "/home/bhernandez/Documents/deepstream/DS_Perf/workspace_experiment"
+
+# video:
+#   path: "dataset/videos/Warehouse_Synthetic_Cam001.mp4"
+#   bound_to_tracking_id: false
+
+# config_path:
+#   tracker_output: "trajDumps/trajDump_Stream_1.txt"
+
+marauders:
+  enable: true
+  # display: true
+  map_path: "projections/map.png"
+  transforms_path: "projections/transforms.yml"
+  # Assumed trajs_dir/trajDump_Stream_%d.txt. If absent, then only GT considered.
+  # trajs_dir: "trajDumps"
+  trajs_dir: "triesMultipleStrings/conf4"
+  gt_path: "dataset/ground_truth.txt"
+  # new. Assumed cams_dir/Warehouse_Synthetic_Cam%03d.yml
+  cams_dir: "dataset/camInfo"
+  # pixel threshold for reprojection size of the bounding box ofr FOV
+  reproj_pixel_thres: 150
+  # end new.
+  traj_window_size: 240
+  fps: 30
+  show: 
+    gt: true
+    traj: true
+    # new
+    cam_loc: true
+    cam_dir: true
+    # cam_fov: true
+    # end new
+    cameras:
+    # - 20
+     - 1
+     - 38
+     - 48
+     - 74
+
+# overlay:
+#   display: true
+#   traj_window_size: 120
+#   show:
+#     tracker_output_bbox: false
+#     tracker_output_bbox_center: true
+#     tracker_output_trajectory: true
+#     tracker_output_convex_hull: true
+#     use_foot_location: true
+#     mdat_output: false
+#     frame_nb: true
+#   tracking:
+#     type: "all"
+#     id: 0
+#   bbox_frame:
+#     width: 1920
+#     height: 1080

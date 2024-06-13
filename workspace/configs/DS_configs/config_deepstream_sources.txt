@@ -1,0 +1,34 @@
+
+
+[source0]
+enable=1
+type=2 # single URI
+cudadec-memtype=0
+gpu-id=0
+uri=file://../../dataset/videos/Warehouse_Synthetic_Cam001.mp4
+
+
+[source0]
+enable=1
+type=3 # multi URI
+cudadec-memtype=0
+gpu-id=0
+num-sources=1
+uri=file://../../py-motmetrics/experiment/dataset/videos/Warehouse_Synthetic_Cam%03d.mp4
+
+
+[source-attr-all]
+enable=1
+type=3
+cudadec-memtype=0
+gpu-id=0
+
+[source-list]
+num-source-bins=4
+list=file://../../dataset/videos/Warehouse_Synthetic_Cam001.mp4;file://../../dataset/videos/Warehouse_Synthetic_Cam038.mp4;file://../../dataset/videos/Warehouse_Synthetic_Cam048.mp4;file://../../dataset/videos/Warehouse_Synthetic_Cam074.mp4
+use-nvmultiurisrcbin=0
+sensor-id-list=01;38;48;74
+sensor-name-list=01;38;48;74
+max-batch-size=10 # default
+sgie-batch-size=16 # 4 x Number-source-bins
+
