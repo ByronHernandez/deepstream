@@ -116,9 +116,11 @@ def config_tracker():
     lines_in = open(workspace_dir + "/configs/DS_configs/config_tracker.yml", "r").readlines()
     lines_out = []
     for line in lines_in:
-        if "trajectoryDumpFileName: ": # trajectoryDumpFileName: "trajDump_Stream_" 
+        if "terminatedTrackFilename: ":
+            line = line.replace("trackDump_Stream_", "trajDumps/trackDump_Stream_")
+        if "trajectoryDumpFileName: ": 
             line = line.replace("trajDump_Stream_", "trajDumps/trajDump_Stream_")
-        if "modelEngineFile: models" in line: # maybe not needed but good for DS config
+        if "modelEngineFile: models" in line:
             line = line.replace("modelEngineFile: models", "modelEngineFile: " + workspace_dir + "/models")
             line = line.replace("b000", "b100")
         if "tltEncodedModel: models" in line:
@@ -141,4 +143,4 @@ def main():
     config_tracker()
 
 if __name__ == "__main__":
-    main()
+    main() # test1

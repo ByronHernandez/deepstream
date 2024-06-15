@@ -40,6 +40,9 @@ TargetManagement:
   earlyTerminationAge: 1    # If the shadowTrackingAge reaches this threshold while in TENTATIVE period, the target will be terminated prematurely.
   maxTrajectoryBufferLength: -1 # [BH 2024.02.20] This solved the problem about missing fields in the output file.
 
+   # dump tracklets in txt file
+  outputTerminatedTracks: 0 # save terminated tracklets
+  terminatedTrackFilename: trackDump_Stream_ # file name: "terminatedTrackFilename"0.txt, "terminatedTrackFilename"1_2.txt, ...
 
 
 TrajectoryManagement:

@@ -5,9 +5,9 @@ marauders:
   display: false
   map_path: "projections/map.png"
   transforms_path: "projections/transforms.yml"
-  trajs_dir: "experiments/filtered40v1_first_run/trajDumps"
+  trajs_dir: "experiments/exp040cam360s_first_run/trajDumps"
   gt_path: "datasets/orig/ground_truth.txt"
-  cams_dir: "experiments/filtered40v1_first_run/camInfo"
+  cams_dir: "experiments/exp040cam360s_first_run/camInfo"
   reproj_pixel_thres: 150
   traj_window_size: 240
   fps: 30
