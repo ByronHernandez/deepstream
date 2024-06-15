@@ -1,11 +1,9 @@
+import os
 import tqdm
 import yaml
 
 cams_to_process = list(range(1, 101))
-# cam_file = "/home/bhernandez/Documents/deepstream/workspace/datasets/occ/camInfo/Warehouse_Synthetic_Cam%03d.yml"
-# cam_file = "/home/bhernandez/Documents/deepstream/workspace/datasets/orig/camInfo/Warehouse_Synthetic_Cam%03d.yml"
-# cam_file = "/home/bhernandez/Documents/MTMC_backup/camInfo/Warehouse_Synthetic_Cam%03d.yml"
-cam_file = "/home/bhernandez/Documents/MTMC_Warehouse_Synthetic_012424/camInfo/Warehouse_Synthetic_Cam%03d.yml"
+cam_file = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/orig/camInfo/Warehouse_Synthetic_Cam%03d.yml"
 
 height = 1.6
 radius = 0.2

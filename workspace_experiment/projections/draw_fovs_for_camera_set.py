@@ -1,9 +1,28 @@
 import os
 import cv2
+import tqdm
 import yaml
 import numpy as np
 
 np.set_printoptions(precision=3, suppress=True)
+
+cam_file = "Warehouse_Synthetic_Cam%03d.yml"
+vid_file = "Warehouse_Synthetic_Cam%03d.mp4"
+
+workspace_path = os.getenv("HOME") + "/Documents/deepstream/workspace/"
+cams_path = workspace_path +  "datasets/orig/camInfo/"
+vids_path = workspace_path + "datasets/orig/videos/"
+proj_path = workspace_path + "projections/"
+map_path = proj_path + "map.png"
+
+camsets = [
+    [1, 38, 48, 74],
+    [2, 3, 4, 96],
+    [10, 30, 43, 90],
+    [9, 40, 49, 51],
+    [11, 27, 59, 69],
+    [12, 16, 20, 84]
+]
 
 # Independent scales
 sx = (1080 - 4) / 110  # Compensating for additional pixels
@@ -16,12 +35,8 @@ T_ov2px = np.array([[-sx, 0, 48 * sx + 1],
 
 T_px2ov = np.linalg.inv(T_ov2px)
 
-cams_path = os.getenv("HOME") + "/Documents/MTMC_Warehouse_Synthetic_012424/camInfo/"
-vids_path = os.getenv("HOME") + "/Documents/MTMC_Warehouse_Synthetic_012424/videos/"
-map_path = os.getenv("HOME") + "/Documents/deepstream/DS_Perf/workspace_experiment/projections/map.png"
-
 def load_and_process_camera_matrices():
-    name_by_cam = cams_path + "Warehouse_Synthetic_Cam%03d.yml"
+    name_by_cam = cams_path + cam_file
     cam_matrices = {}
     for cam in range(1, 101):
         with open(name_by_cam % cam, 'r') as file:
@@ -71,7 +86,7 @@ def get_cam_frame_from_video(video_path, frame_num):
 def create_camset_mosaic(camset, name):
     frames = []
     for cam in camset:
-        name_vid = vids_path + "Warehouse_Synthetic_Cam%03d.mp4" % cam
+        name_vid = vids_path + vid_file % cam
         frame = get_cam_frame_from_video(name_vid, 0)
         h, w = frame.shape[:2]
         text = "CAM%03d" % cam
@@ -79,8 +94,9 @@ def create_camset_mosaic(camset, name):
         frames.append(frame)
     mosaic = create_2x2_mosaic(frames)
     mosaic_resized = cv2.resize(mosaic, (mosaic.shape[1] // 2, mosaic.shape[0] // 2))
-    print("Saving camset mosaic to output/cam_sets/" + name + ".png")
-    cv2.imwrite("output/cam_sets/" + name + ".png", mosaic_resized)
+    out_path = projs_dir + "output/cam_sets/%s.png" % name
+    print("Saving camset mosaic to %s" % out_path)
+    cv2.imwrite(out_path, mosaic_resized)
 
 def back_project_z_plane(pos, cam, cam_matrices, z = 0):
     _, Q, _, _, _, Rt, _, _, _ ,_ = cam_matrices[cam]
@@ -110,7 +126,8 @@ def get_camera_fov_mask(map, cam_calib, num_pix):
     xy_px = xy_px.astype(int)
     map2 = map.copy()
     map2[xy_px[1], xy_px[0]] = [100, 150, 50]
-    cv2.imwrite("output/grid.png", (0.5 * map + 0.5 * map2).astype(np.uint8))
+    # print("Saving grid to %s" % proj_path + "output/grid.png")
+    cv2.imwrite(proj_path + "output/grid.png", (0.5 * map + 0.5 * map2).astype(np.uint8))
     # Create 3D points in z=0, z=h/2, z=h
     xyz_0 = cv2.convertPointsToHomogeneous(xy_ov)
     xyz_m = cv2.convertPointsToHomogeneous(xy_ov)
@@ -130,7 +147,8 @@ def get_camera_fov_mask(map, cam_calib, num_pix):
     mask4 = ((xy_ov - pos.T) @ (end - pos)).flatten() > 0                   # OK
     # Update the mask
     mask[xy_px[1], xy_px[0]] = mask1 & mask2 & mask3 & mask4
-    cv2.imwrite('mask.png', (mask * 255).astype(np.uint8))
+    # print("Saving mask to %s" % proj_path + "output/mask.png")
+    cv2.imwrite(proj_path + 'output/mask.png', (mask * 255).astype(np.uint8))
     return np.stack((mask, mask, mask), axis=-1)
 
 def putCenteredText(img, text, coords, color, fontScale=0.5, thickness=2):
@@ -150,7 +168,7 @@ def draw_camset_fovs(map, camset, cam_matrices):
     colores = [random_color() for _ in camset]
     masks = []
     maps = []
-    for i, cam in enumerate(camset):
+    for i, cam in tqdm.tqdm(enumerate(camset), desc="Drawing FOVs"):
         mask = get_camera_fov_mask(map, cam_matrices[cam], num_pix=150)
         masked = mask * np.array(colores[i]).reshape(1, 1, 3)
         maps.append(map - map * mask + masked)
@@ -165,27 +183,24 @@ def draw_camset_fovs(map, camset, cam_matrices):
         map = plot_camera_position(map, cam, cam_matrices)
     return map
 
-if __name__ == "__main__":
+# TODO:
+# Convert everything to global paths and make util
+
+def main():
+    os.makedirs(proj_path + "output/cam_sets", exist_ok=True)
     map = cv2.imread(map_path)
     np.random.seed(100)
     cam_matrices = load_and_process_camera_matrices()
     for cam in range(1, 101):
         map = plot_camera_position(map, cam, cam_matrices)
-    cv2.imwrite("output/map_cameras.png", map)
-
-    # camsets = [
-    #     [1, 38, 48, 74],
-    #     [2, 3, 4, 96],
-    #     [10, 30, 43, 90],
-    #     [9, 40, 49, 51],
-    #     [11, 27, 59, 69],
-    #     [12, 16, 20, 84]
-    # ]
-    # camsets = [[16, 20, 49, 49]]
-    camsets = [[9, 9, 49, 49]]
+    cv2.imwrite(proj_path + "output/map_cameras.png", map)
     for camset in camsets:
         name = "_".join([str(cam) for cam in camset])
-        create_camset_mosaic(camset, name)
+        # create_camset_mosaic(camset, name)
         map = cv2.imread(map_path)
         map = draw_camset_fovs(map, camset, cam_matrices)
-        cv2.imwrite("output/cam_sets/map_" + name + ".png", map)
+        print("Saving map to %s" % proj_path + "output/cam_sets/map_" + name + ".png")
+        cv2.imwrite(proj_path + "output/cam_sets/map_" + name + ".png", map)
+
+if __name__ == "__main__":
+    main()

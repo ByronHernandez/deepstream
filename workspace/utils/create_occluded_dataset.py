@@ -10,12 +10,12 @@ from multiprocessing import Pool
 
 cam_file = "Warehouse_Synthetic_Cam%03d.yml"
 vid_file = "Warehouse_Synthetic_Cam%03d.mp4"
-mtmc_dir = "/home/bhernandez/Documents/deepstream/workspace/datasets/orig"
-mtmc_occ_out_dir = "/home/bhernandez/Documents/deepstream/workspace/datasets/occ"
+mtmc_dir = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/orig"
+mtmc_occ_out_dir = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/occ"
 
 occlusion_bbox = [1/3, 1/3, 2/3, 2/3] # [x1, y1, w, h] in scale (0, 1)
 cams_to_process = list(range(1, 101)) # [1, 2, 3, 4] # list(range(1, 101))
-nproc = 50
+nproc = 4
 
 def occlude_video(intuple):
     inp_file_name, out_file_name, log_file = intuple
@@ -40,8 +40,9 @@ def occlude_video(intuple):
     # out.release()
     vid.release()
     with open(log_file, "w") as log:
-        subprocess.run(["ffmpeg", "-y", "-i", inp_file_name, "-vf", # "video filter",
-                        "drawbox=x=%d:y=%d:w=%d:h=%d:color=black:t=fill" % (x1, y1, x2-x1, y2-y1),
+        subprocess.run(["ffmpeg", "-y", "-i", inp_file_name,
+                        # "-t", "30",         # time limit
+                        "-vf", "drawbox=x=%d:y=%d:w=%d:h=%d:color=black:t=fill" % (x1, y1, x2-x1, y2-y1), # video filter
                         "-c:v", "libx264",  # video codec
                         # "-crf", "20",       # constant rate factor to 22
                         "-b:v", "2250k",    # bitrate

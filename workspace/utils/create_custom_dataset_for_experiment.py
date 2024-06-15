@@ -3,14 +3,13 @@ import json
 import shutil
 import subprocess
 
-# define paths
-workspace_dir = "/home/bhernandez/Documents/deepstream/workspace"
-mtmc_dir = "/home/bhernandez/Documents/deepstream/workspace/datasets/orig"
-mtmc_occ_dir = "/home/bhernandez/Documents/deepstream/workspace/datasets/occ"
-mot_gt_dir = "/ground_truth"
-
 cam_file = "Warehouse_Synthetic_Cam%03d.yml"
 vid_file = "Warehouse_Synthetic_Cam%03d.mp4"
+
+workspace_dir = os.getenv("HOME") + "/Documents/deepstream/workspace"
+mtmc_dir = workspace_dir + "/datasets/orig"
+mtmc_occ_dir = workspace_dir + "/datasets/occ"
+mot_gt_dir = "/ground_truth"
 
 def get_cams_from_filtered_calib(version=1):
     with open(mtmc_dir + "/calibration_filtered_v%d.json" % version, "r") as f:
@@ -24,12 +23,12 @@ def get_cams_from_filtered_calib(version=1):
 version = 1 # 1: 40cam # 2: 80cam
 cams_to_process = [38, 74] # get_cams_from_filtered_calib(version) # list(range(1, 101)) # [1, 38, 48, 74] # [1, 74] # [38, 74]
 cams_to_process_occ = [] # [] # list(range(2, 101, 2)) # [1, 48]
-max_frames = 60 * 30 # -1 # seconds * fps
+max_frames = -1 # -1 # seconds * fps
 experiment = '/experiments/exp002cam060s'
 
 out_dataset_path = workspace_dir + experiment
 
-def handle_cam_paths(cams, cams_dir, cont, seqmap, exp):
+def handle_cams_paths(cams, cams_dir, cont, seqmap, exp):
     for cam in cams:
         os.symlink(cams_dir + "/camInfo/" + cam_file % cam, out_dataset_path + "/camInfo/" + cam_file % cont)
         if max_frames == -1:
@@ -70,9 +69,9 @@ def handle_paths():
     exp = open(out_dataset_path + "/experiment.yml", "w")
     exp.write("seq2cam:\n")
     if len(cams_to_process) > 0: exp.write("  seq2orig:\n")
-    cont = handle_cam_paths(cams_to_process, mtmc_dir, cont=0, seqmap=seqmap, exp=exp)
+    cont = handle_cams_paths(cams_to_process, mtmc_dir, cont=0, seqmap=seqmap, exp=exp)
     if len(cams_to_process_occ) > 0:  exp.write("  seq2occ:\n")
-    handle_cam_paths(cams_to_process_occ, mtmc_occ_dir, cont, seqmap, exp)
+    handle_cams_paths(cams_to_process_occ, mtmc_occ_dir, cont, seqmap, exp)
     seqmap.close()
     exp.close()
 
