@@ -21,10 +21,10 @@ def get_cams_from_filtered_calib(version=1):
     return sorted(list(ids))
 
 version = 1 # 1: 40cam # 2: 80cam
-cams_to_process = [38, 74] # get_cams_from_filtered_calib(version) # list(range(1, 101)) # [1, 38, 48, 74] # [1, 74] # [38, 74]
+cams_to_process = list(range(1, 101)) # get_cams_from_filtered_calib(version) # list(range(1, 101)) # [1, 38, 48, 74] # [1, 74] # [38, 74]
 cams_to_process_occ = [] # [] # list(range(2, 101, 2)) # [1, 48]
-max_frames = -1 # -1 # seconds * fps
-experiment = '/experiments/exp002cam060s'
+max_frames = 60 * 30 # -1 # seconds * fps
+experiment = '/experiments/exp100cam060s'
 
 out_dataset_path = workspace_dir + experiment
 
@@ -142,4 +142,4 @@ def main():
     config_tracker()
 
 if __name__ == "__main__":
-    main() # test1
+    main()

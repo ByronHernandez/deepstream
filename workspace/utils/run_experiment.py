@@ -3,7 +3,7 @@ import yaml
 import subprocess
 
 workspace_dir = "/home/bhernandez/Documents/deepstream/workspace"
-experiment_dir = workspace_dir + "/experiments/exp002cam060s"
+experiment_dir = workspace_dir + "/experiments/exp040cam060s"
 
 docker_image_version = "ds-24-06-11:7.1-mv-assoc"
 

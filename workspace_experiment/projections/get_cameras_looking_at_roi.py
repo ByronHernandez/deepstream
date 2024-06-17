@@ -11,7 +11,7 @@ workspace_path = os.getenv("HOME") + "/Documents/deepstream/workspace/"
 proj_path = workspace_path + "projections/"
 map_path = proj_path + "map.png"
 
-roi_ov = [-50, 0, -100, -100] # [x1, y1, x2, y2]
+roi_ov = [-50, -0, -100, -100] # [x1, y1, x2, y2]
 
 # Independent scales
 sx = (1080 - 4) / 110  # Compensating for additional pixels
@@ -30,7 +30,7 @@ def get_roi_mask(mask):
     pts_px = cv2.perspectiveTransform(pts, T_ov2px).reshape(-1, 2)
     pts_px = np.round(pts_px).astype(int)
     cv2.rectangle(mask, tuple(pts_px[0]), tuple(pts_px[1]), (1, 1, 1), -1)
-    cv2.imshow("mask", (mask * 255).astype(np.uint8))
+    # cv2.imshow("mask", (mask * 255).astype(np.uint8))
     return mask
 
 def main():
