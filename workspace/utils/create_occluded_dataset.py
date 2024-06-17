@@ -6,6 +6,7 @@ import cv2
 import tqdm
 import shutil
 import subprocess
+import multiprocessing
 from multiprocessing import Pool
 
 cam_file = "Warehouse_Synthetic_Cam%03d.yml"
@@ -15,11 +16,11 @@ mtmc_occ_out_dir = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets
 
 occlusion_bbox = [1/3, 1/3, 2/3, 2/3] # [x1, y1, w, h] in scale (0, 1)
 cams_to_process = list(range(1, 101)) # [1, 2, 3, 4] # list(range(1, 101))
-nproc = 4
+nproc = 10
 
 def occlude_video(intuple):
     inp_file_name, out_file_name, log_file = intuple
-    print("Creating occluded video: ", inp_file_name.split('/')[-1])
+    print("Creating occluded video:", inp_file_name.split('/')[-1])
     vid = cv2.VideoCapture(inp_file_name)
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     frames = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -66,7 +67,11 @@ def main():
         out_video = mtmc_occ_out_dir + "/videos/" + vid_file % cam
         arg_collector.append((inp_video, out_video, out_log))
 
-    with Pool(min(nproc, len(cams_to_process))) as p:
+    cpus = multiprocessing.cpu_count()
+    ncams = len(cams_to_process)
+    print("Available processors:", cpus)
+    print("Number of processors to use:", min(nproc, cpus, ncams))
+    with Pool(min(nproc, ncams, cpus)) as p:
         p.map(occlude_video, arg_collector)
 
 if __name__ == "__main__":
