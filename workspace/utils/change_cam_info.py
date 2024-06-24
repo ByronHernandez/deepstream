@@ -2,8 +2,10 @@ import os
 import tqdm
 import yaml
 
+home_dir = "/home/bhernandez" # os.getenv("HOME")
+cam_file = home_dir + "/Documents/deepstream/workspace/datasets/orig/camInfo/Warehouse_Synthetic_Cam%03d.yml"
+
 cams_to_process = list(range(1, 101))
-cam_file = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/orig/camInfo/Warehouse_Synthetic_Cam%03d.yml"
 
 height = 1.6
 radius = 0.2

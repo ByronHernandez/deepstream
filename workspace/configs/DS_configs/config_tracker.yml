@@ -21,7 +21,7 @@
 # DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-# config_tracker_NvDCF_accuracy_3D.txt
+# config_tracker_NvDCF_accuracy_3D.yml
 
 BaseConfig:
   debugVerboseLevel: 1
@@ -30,7 +30,7 @@ BaseConfig:
 TargetManagement:
   enableBboxUnClipping: 1    # In case the bbox is likely to be clipped by image border, unclip bbox
   preserveStreamUpdateOrder: 0    # When assigning new target ids, preserve input streams' order to keep target ids in a deterministic order over multuple runs
-  maxTargetsPerStream: 100    # Max number of targets to track per stream. Recommended to set >10. Note: this value should account for the targets being tracked in shadow mode as well. Max value depends on the GPU memory capacity. It was 150
+  maxTargetsPerStream: 32    # Max number of targets to track per stream. Recommended to set >10. Note: this value should account for the targets being tracked in shadow mode as well. Max value depends on the GPU memory capacity. It was 150
 
   # [Creation & Termination Policy]
   minIouDiff4NewTarget: 0.3686    # If the IOU between the newly detected object and any of the existing targets is higher than this threshold, this newly detected object will be discarded.
@@ -134,9 +134,9 @@ ReID:
 
   # [Reid Network Info]
   batchSize: 100    # Batch size of reid network. It was 100
-  workspaceSize: 1024    # Workspace size to be used by reid engine, in MB. It was 1000
+  workspaceSize: 1000    # Workspace size to be used by reid engine, in MB. It was 1000
   reidFeatureSize: 256    # Size of reid feature. It was 256
-  reidHistorySize: 128    # Max number of reid features kept for one object. It was 100
+  reidHistorySize: 100    # Max number of reid features kept for one object. It was 100
   inferDims: [3, 256, 128]    # Reid network input dimension CHW or HWC based on inputOrder
   networkMode: 1    # Reid network inference precision mode among {fp32=0, fp16=1, int8=2 }
 

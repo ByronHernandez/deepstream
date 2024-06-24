@@ -2,8 +2,9 @@ import os
 import yaml
 import subprocess
 
-workspace_dir = "/home/bhernandez/Documents/deepstream/workspace"
-experiment_dir = workspace_dir + "/experiments/exp040cam060s"
+home_dir = "/home/bhernandez" # os.getenv("HOME")
+workspace_dir = home_dir + "/Documents/deepstream/workspace"
+experiment_dir = workspace_dir + "/experiments/exp100cam060s"
 
 docker_image_version = "ds-24-06-11:7.1-mv-assoc"
 
@@ -18,8 +19,8 @@ def get_docker_command():
             '-w', experiment_dir, docker_image_version]
 
 def main():
-    os.makedirs("outVideos", exist_ok=True)
-    os.makedirs("trajDumps", exist_ok=True)
+    os.makedirs(experiment_dir + "/outVideos", exist_ok=True)
+    os.makedirs(experiment_dir + "/trajDumps", exist_ok=True)
     os.chdir(experiment_dir)
     with open(experiment_dir + "/experiment.yml", "r") as file:
         yaml_data = yaml.load(file, Loader=yaml.FullLoader)

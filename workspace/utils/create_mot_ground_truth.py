@@ -5,7 +5,8 @@ import os
 import tqdm
 import time
 
-mtmc_dir = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/orig"
+home_dir = "/home/bhernandez" # os.getenv("HOME")
+mtmc_dir = home_dir + "/Documents/deepstream/workspace/datasets/orig"
 mot_gt_dir = mtmc_dir + "/ground_truth"
 
 cams_to_process = list(range(1, 101))

@@ -11,8 +11,10 @@ from multiprocessing import Pool
 
 cam_file = "Warehouse_Synthetic_Cam%03d.yml"
 vid_file = "Warehouse_Synthetic_Cam%03d.mp4"
-mtmc_dir = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/orig"
-mtmc_occ_out_dir = os.getenv("HOME") + "/Documents/deepstream/workspace/datasets/occ"
+
+home_dir = "/home/bhernandez" # os.getenv("HOME")
+mtmc_dir = home_dir + "/Documents/deepstream/workspace/datasets/orig"
+mtmc_occ_out_dir = home_dir + "/Documents/deepstream/workspace/datasets/occ"
 
 occlusion_bbox = [1/3, 1/3, 2/3, 2/3] # [x1, y1, w, h] in scale (0, 1)
 cams_to_process = list(range(1, 101)) # [1, 2, 3, 4] # list(range(1, 101))

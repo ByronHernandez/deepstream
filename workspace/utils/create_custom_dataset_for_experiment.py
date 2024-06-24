@@ -6,7 +6,8 @@ import subprocess
 cam_file = "Warehouse_Synthetic_Cam%03d.yml"
 vid_file = "Warehouse_Synthetic_Cam%03d.mp4"
 
-workspace_dir = os.getenv("HOME") + "/Documents/deepstream/workspace"
+home_dir = "/home/bhernandez" # os.getenv("HOME")
+workspace_dir = home_dir + "/Documents/deepstream/workspace"
 mtmc_dir = workspace_dir + "/datasets/orig"
 mtmc_occ_dir = workspace_dir + "/datasets/occ"
 mot_gt_dir = "/ground_truth"
@@ -21,7 +22,7 @@ def get_cams_from_filtered_calib(version=1):
     return sorted(list(ids))
 
 version = 1 # 1: 40cam # 2: 80cam
-cams_to_process = list(range(1, 101)) # get_cams_from_filtered_calib(version) # list(range(1, 101)) # [1, 38, 48, 74] # [1, 74] # [38, 74]
+cams_to_process = range(1, 101) # get_cams_from_filtered_calib(version) # list(range(1, 101)) # [1, 38, 48, 74] # [1, 74] # [38, 74]
 cams_to_process_occ = [] # [] # list(range(2, 101, 2)) # [1, 48]
 max_frames = 60 * 30 # -1 # seconds * fps
 experiment = '/experiments/exp100cam060s'
@@ -62,10 +63,14 @@ def handle_paths():
     os.makedirs(out_dataset_path + "/videos", exist_ok=True)
     os.makedirs(out_dataset_path + "/camInfo", exist_ok=True)
     os.makedirs(out_dataset_path + mot_gt_dir, exist_ok=True)
-    os.makedirs(out_dataset_path + "/trajDumps", exist_ok=True) # to run the tracker
-    os.makedirs(out_dataset_path + "/kitti_detector", exist_ok=True)
-    os.makedirs(out_dataset_path + "/kitti_tracker", exist_ok=True)
-    seqmap = open(out_dataset_path + "/seqmap.txt", "w")
+    # To run and log the experiment
+    os.makedirs(out_dataset_path + "/trajDumps", exist_ok=True)
+    # os.makedirs(out_dataset_path + "/outVideos", exist_ok=True)
+    os.makedirs(out_dataset_path + "/outMVReAssoc", exist_ok=True)
+    os.makedirs(out_dataset_path + "/outCommunicator", exist_ok=True)
+    # os.makedirs(out_dataset_path + "/kitti_detector", exist_ok=True)
+    # os.makedirs(out_dataset_path + "/kitti_tracker", exist_ok=True)
+    seqmap = open(out_dataset_path + "/seqmap.txt", "w") # take out
     exp = open(out_dataset_path + "/experiment.yml", "w")
     exp.write("seq2cam:\n")
     if len(cams_to_process) > 0: exp.write("  seq2orig:\n")
@@ -116,9 +121,9 @@ def config_tracker():
     lines_out = []
     for line in lines_in:
         if "terminatedTrackFilename: ":
-            line = line.replace("trackDump_Stream_", "trajDumps/trackDump_Stream_")
+            line = line.replace("trackDump_Stream_", out_dataset_path + "/trajDumps/trackDump_Stream_")
         if "trajectoryDumpFileName: ": 
-            line = line.replace("trajDump_Stream_", "trajDumps/trajDump_Stream_")
+            line = line.replace("trajDump_Stream_", out_dataset_path + "/trajDumps/trajDump_Stream_")
         if "modelEngineFile: models" in line:
             line = line.replace("modelEngineFile: models", "modelEngineFile: " + workspace_dir + "/models")
             line = line.replace("b000", "b100")
