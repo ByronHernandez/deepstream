@@ -6,7 +6,11 @@ import subprocess
 cam_file = "Warehouse_Synthetic_Cam%03d.yml"
 vid_file = "Warehouse_Synthetic_Cam%03d.mp4"
 
+<<<<<<< HEAD
 home_dir = "/home/bhernandez" # os.getenv("HOME")
+=======
+home_dir = os.getenv("HOME") # "/home/bhernandez" # os.getenv("HOME")
+>>>>>>> 62b1071 (update)
 workspace_dir = home_dir + "/Documents/deepstream/workspace"
 mtmc_dir = workspace_dir + "/datasets/orig"
 mtmc_occ_dir = workspace_dir + "/datasets/occ"
@@ -24,12 +28,12 @@ def get_cams_from_filtered_calib(version=1):
 version = 1 # 1: 40cam # 2: 80cam
 cams_to_process = range(1, 101) # get_cams_from_filtered_calib(version) # list(range(1, 101)) # [1, 38, 48, 74] # [1, 74] # [38, 74]
 cams_to_process_occ = [] # [] # list(range(2, 101, 2)) # [1, 48]
-max_frames = 60 * 30 # -1 # seconds * fps
-experiment = '/experiments/exp100cam060s'
+max_frames = -1 # 60 * 30 # -1 # seconds * fps
+experiment = '/experiments/exp100cam360s'
 
 out_dataset_path = workspace_dir + experiment
 
-def handle_cams_paths(cams, cams_dir, cont, seqmap, exp):
+def handle_cams_paths(cams, cams_dir, cont, exp, seqmap=0):
     for cam in cams:
         os.symlink(cams_dir + "/camInfo/" + cam_file % cam, out_dataset_path + "/camInfo/" + cam_file % cont)
         if max_frames == -1:
@@ -53,7 +57,7 @@ def handle_cams_paths(cams, cams_dir, cont, seqmap, exp):
             file_inp.close()
             file_out.close()
             file_seq.close()
-        seqmap.write("%03d\n" % cont)
+        # seqmap.write("%03d\n" % cont)
         exp.write("    %03d: %03d\n" % (cont, cam))
         cont += 1
     return cont
@@ -70,14 +74,18 @@ def handle_paths():
     os.makedirs(out_dataset_path + "/outCommunicator", exist_ok=True)
     # os.makedirs(out_dataset_path + "/kitti_detector", exist_ok=True)
     # os.makedirs(out_dataset_path + "/kitti_tracker", exist_ok=True)
+<<<<<<< HEAD
     seqmap = open(out_dataset_path + "/seqmap.txt", "w") # take out
+=======
+    # seqmap = open(out_dataset_path + "/seqmap.txt", "w") # take out
+>>>>>>> 62b1071 (update)
     exp = open(out_dataset_path + "/experiment.yml", "w")
     exp.write("seq2cam:\n")
     if len(cams_to_process) > 0: exp.write("  seq2orig:\n")
-    cont = handle_cams_paths(cams_to_process, mtmc_dir, cont=0, seqmap=seqmap, exp=exp)
+    cont = handle_cams_paths(cams_to_process, mtmc_dir, cont=0, exp=exp)
     if len(cams_to_process_occ) > 0:  exp.write("  seq2occ:\n")
-    handle_cams_paths(cams_to_process_occ, mtmc_occ_dir, cont, seqmap, exp)
-    seqmap.close()
+    handle_cams_paths(cams_to_process_occ, mtmc_occ_dir, cont, exp)
+    # seqmap.close()
     exp.close()
 
 def config_deepstream():
