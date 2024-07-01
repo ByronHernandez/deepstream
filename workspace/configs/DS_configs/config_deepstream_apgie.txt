@@ -23,7 +23,7 @@ live-source=0
 gpu-id=0
 
 [primary-gie]
-enable=0
+enable=1
 nvbuf-memory-type=0
 bbox-border-color3=0;1;0;1
 model-engine-file=models/PeopleNet2.6/resnet34_peoplenet_int8.etlt_b000_gpu0_int8.engine
@@ -35,15 +35,6 @@ gpu-id=0
 gie-unique-id=1
 interval=0
 config-file=config_pgie.txt
-
-[loadlabels]
-enable=0
-label-dir=ground_truth
-file-names=000.txt
-# max-frame-nums=0
-label-width=1920
-label-height=1080
-interval=0
 
 [tracker]
 enable=1

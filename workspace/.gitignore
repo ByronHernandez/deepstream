@@ -1,6 +1,6 @@
 dataset/
 datasets/
-experiments/
+experiments*/
 models/
 venv/
 *.mp4

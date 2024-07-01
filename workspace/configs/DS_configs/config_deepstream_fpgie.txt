@@ -22,22 +22,8 @@ batch-size=0
 live-source=0
 gpu-id=0
 
-[primary-gie]
-enable=0
-nvbuf-memory-type=0
-bbox-border-color3=0;1;0;1
-model-engine-file=models/PeopleNet2.6/resnet34_peoplenet_int8.etlt_b000_gpu0_int8.engine
-bbox-border-color2=0;0;1;1
-bbox-border-color1=0;1;1;1
-bbox-border-color0=1;0;0;1
-batch-size=0
-gpu-id=0
-gie-unique-id=1
-interval=0
-config-file=config_pgie.txt
-
 [loadlabels]
-enable=0
+enable=1
 label-dir=ground_truth
 file-names=000.txt
 # max-frame-nums=0

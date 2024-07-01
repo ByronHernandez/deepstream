@@ -1,11 +1,11 @@
 root_path: "/home/bhernandez/Documents/deepstream/workspace"
 
 video:
-  path: "experiments/filtered40v1_first_run/videos/Warehouse_Synthetic_Cam008.mp4"
+  path: "experiments/exp004cam060s/videos/Warehouse_Synthetic_Cam002.mp4"
   bound_to_tracking_id: false
 
 config_path:
-  tracker_output: "experiments/filtered40v1_first_run/trajDumps/trajDump_Stream_8.txt"
+  tracker_output: "experiments/exp004cam060s/trajDumps/trajDump_Stream_2.txt"
 
 overlay:
   display: false

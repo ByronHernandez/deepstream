@@ -30,7 +30,7 @@ BaseConfig:
 TargetManagement:
   enableBboxUnClipping: 1    # In case the bbox is likely to be clipped by image border, unclip bbox
   preserveStreamUpdateOrder: 0    # When assigning new target ids, preserve input streams' order to keep target ids in a deterministic order over multuple runs
-  maxTargetsPerStream: 32    # Max number of targets to track per stream. Recommended to set >10. Note: this value should account for the targets being tracked in shadow mode as well. Max value depends on the GPU memory capacity. It was 150
+  maxTargetsPerStream: 30    # Max number of targets to track per stream. Recommended to set >10. Note: this value should account for the targets being tracked in shadow mode as well. Max value depends on the GPU memory capacity. It was 150
 
   # [Creation & Termination Policy]
   minIouDiff4NewTarget: 0.3686    # If the IOU between the newly detected object and any of the existing targets is higher than this threshold, this newly detected object will be discarded.
@@ -156,5 +156,13 @@ ReID:
   tltModelKey: "nvidia_tao" # NVIDIA TAO model key
 
 MultiViewAssociator:
-  multiViewAssociatorType: 1 # the type of multi-view associator among { DUMMY_ASSOCIATOR=0, MULTI_VIEW_ASSOCIATOR=1 }
-  communicatorType: 1 # the type of communicator among { DUMMY_COMMUNICATOR=0, MEMORY_ACCESS_COMMUNICATOR=1 }
+  multiViewAssociatorType: 0 # the type of multi-view associator among { DUMMY_ASSOCIATOR=0, MULTI_VIEW_ASSOCIATOR=1 }
+  communicatorType: 0 # the type of communicator among { DUMMY_COMMUNICATOR=0, MEMORY_ACCESS_COMMUNICATOR=1 }
+  
+  maxPeerTrackletSize: 50 # max size of peer target tracklet, it is used to send and store the tracklet information
+  minCommonFrames4MatchScore: 5 # min common frames to calculate the tracklet similarity
+  distanceRef4HalfMatchScore: 3.0 # distance in world coordinates to match 50% similarity, the more distance, the less similarity
+  minPeerTrackletMatchScore: 0.5 # tracklet similarity threshold to match the tracklet
+
+  # Camera number (int) to match the order of the source streams (absolute or relative)
+  cameraIDs: [0]
